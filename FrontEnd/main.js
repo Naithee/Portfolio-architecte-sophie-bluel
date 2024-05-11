@@ -151,6 +151,8 @@ function processResponseApi() {
     focusCategory("Tous")
 }
 
+
+
 // Executes the function calls after receiving the response of the API 
 getWorksApi().then(processResponseApi)
 

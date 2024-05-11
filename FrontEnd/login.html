@@ -10,7 +10,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=Work+Sans&display=swap"
         rel="stylesheet">
     <meta name="description" content="">
-    <script src="main.js" defer></script>
+    <script src="login.js" defer></script>
     <link rel="stylesheet" href="./assets/login.style.css">
 </head>
 
@@ -32,10 +32,11 @@
             <form>
                 <label for="email">E-mail</label>
                 <input type="text" id="email" name="email">
+                <p id="errorMessage"></p>
                 <label for="password">Mot de passe</label>
                 <input type="password" name="password" id="password">
                 <div class="button-container">
-                    <button>Se connecter</button>
+                    <button type="submit" id="submitButton">Se connecter</button>
                     <a href="#">Mot de passe oublié</a>
                 </div>
             </form>
