@@ -29,14 +29,16 @@
     <main>
         <section class="login-container">
             <h2>Log in</h2>
-            <form>
+            <form method="post">
                 <label for="email">E-mail</label>
                 <input type="text" id="email" name="email">
-                <p id="errorMessage"></p>
+                <div class="error-container">
+                    <p id="errorMessage"></p>
+                </div>
                 <label for="password">Mot de passe</label>
                 <input type="password" name="password" id="password">
                 <div class="button-container">
-                    <button type="submit" id="submitButton">Se connecter</button>
+                    <button type="submit">Se connecter</button>
                     <a href="#">Mot de passe oublié</a>
                 </div>
             </form>

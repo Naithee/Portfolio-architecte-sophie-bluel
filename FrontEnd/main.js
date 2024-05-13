@@ -5,7 +5,7 @@ const backendHost = "http://localhost:5678/api"
 let worksRessource = [];
 // Stores the API content displayed in the DOM  
 let displayedWorksRessource = []
-// Stores the category names of the works 
+// Stores the category names of the works, initialised with "Tous"
 let categoryKeysArray = ["Tous"]
 
 //  Function that gets the data from the API and deserializes it
@@ -36,10 +36,12 @@ function renderGalleryContent() {
 
     //  Get the DOM element where the pictures will be inserted 
     const pictureContainer = document.querySelector(".gallery")
-    //  Removes the content of the gallery
+    //  Removes the content of the gallery in the DOM
     pictureContainer.innerHTML = ""
 
-    // Creates a new DOM elements for each picture and each title 
+    /* Creates a new DOM element for each object of the API response /works 
+    (we access the pictures and the titles of each object and display them)
+    */
     for (let i = 0; i < displayedWorksRessource.length; i++) {
 
         let newFigure = document.createElement("figure")
@@ -116,6 +118,9 @@ function displayCategoryKeys() {
         let categoryTitle = document.createElement("button")
         categoryTitle.classList.add("category-button")
         categoryTitle.setAttribute("onclick", `focusCategory("${categoryKeysArray[i]}")`)
+        /* We set a new attribute for each button and give it the value
+         of its belonging category key to escape the "&" character in the
+         "Hotels & restaurants" category button */
         categoryTitle.setAttribute("category-key", categoryKeysArray[i])
         categoryTitle.innerText = categoryKeysArray[i]
 
