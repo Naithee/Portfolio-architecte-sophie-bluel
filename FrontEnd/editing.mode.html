@@ -50,9 +50,14 @@
             </article>
         </section>
         <section id="portfolio">
-            <h2>Mes Projets</h2>
-            <button onclick="displayPopup()">Button</button>
-            <div class="filter"></div>
+            <div class="title-container">
+                <h2>Mes Projets</h2>
+                <div class="modify-group" onclick="displayPopup()">
+                    <i class="fa-regular fa-pen-to-square"></i>
+                    <p>modifier</p>
+                </div>
+            </div>
+            <div class="filter"></div> <!--To change :The filters are not displayed on editing mode !!-->
             <div class="gallery"></div>
         </section>
         <section id="contact">
@@ -79,15 +84,44 @@
     </footer>
 
     <div class="popup-background">
-        <div class="popup">
-            <div class="x-container">
+        <div class="popup" id="popup-delete">
+            <div class="icone-container">
                 <i class="fa-solid fa-xmark" onclick="hidePopup()"></i>
             </div>
             <h3>Galerie photo</h3>
             <div class="popup-gallery"></div>
             <hr>
-            <button>Ajouter une photo</button>
+            <button class="popup-button" onclick="displayAddWorkPopup()">Ajouter une photo</button>
         </div>
+
+        <div class="popup" id="popup-add">
+            <div class="icone-container">
+                <i class="fa-solid fa-arrow-left" id="return-icone" onclick="returnIcone()"></i>
+                <i class="fa-solid fa-xmark" onclick="hidePopup()"></i>
+            </div>
+            <h3>Ajout Photo</h3>
+            <div class="image-container"><i class="fa-regular fa-image"></i>
+                <input type="file" id="file" name="filename" accept="image/png, image/jpeg">
+                <p>jpg, png: 4mo max</p>
+            </div>
+            <form method="post">
+                <label for="email">Titre</label>
+                <input type="text" id="titre" name="titre">
+                <div class="error-container">
+                    <p id="errorMessage"></p>
+                </div>
+                <label for="password">Catégorie</label>
+                <select>
+                    <option></option>
+                    <option value="test">Objets</option>
+                    <option value="test">Appartements</option>
+                    <option value="test">Hotels & restaurants</option>
+                </select>
+            </form>
+            <hr>
+            <button class="popup-button" id="validate-button" onclick="">Valider</button>
+        </div>
+    </div>
     </div>
 </body>
 

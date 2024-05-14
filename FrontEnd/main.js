@@ -86,7 +86,7 @@ async function removePopupWork() {
 
     const workId = displayedWorksRessource.id
     console.log(workId)
-    
+
     const deleteOptions = {
         method: "DELETE",
         body: JSON.stringify(workId),
@@ -97,7 +97,7 @@ async function removePopupWork() {
 
     let deleteResponse = await fetch(`${backendHost}/works/{id}`, deleteOptions)
     if (deleteResponse === 200) {
-        console.log(`"Deleted work : ${{workId}}"`)
+        console.log(`"Deleted work : ${{ workId }}"`)
     }
 
 }
@@ -105,6 +105,8 @@ async function removePopupWork() {
 function displayPopup() {
     let popupBackground = document.querySelector(".popup-background")
     popupBackground.style.display = "flex"
+    let popupAdd = document.getElementById("popup-add")
+    popupAdd.style.display = "none"
 }
 
 // ! add a function that will allow to leave the popup on clicking on the background
@@ -112,6 +114,26 @@ function displayPopup() {
 function hidePopup() {
     let popupBackground = document.querySelector(".popup-background")
     popupBackground.style.display = "none"
+}
+
+function displayAddWorkPopup() {
+
+    let popupDelete = document.getElementById("popup-delete")
+    popupDelete.style.display = "none"
+
+    let popupAdd = document.getElementById("popup-add")
+    popupAdd.style.display = "flex"
+
+}
+
+function returnIcone() {
+    let popupDelete = document.getElementById("popup-delete")
+    popupDelete.style.display = "flex"
+
+    let popupAdd = document.getElementById("popup-add")
+    popupAdd.style.display = "none"
+
+    // in the future do a if/ else to redirect to the correct popup
 }
 
 
