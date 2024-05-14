@@ -81,8 +81,24 @@ function renderPopupGallery() {
 }
 
 // not working yet + move all the functions related to popup in another file
-function removePopupWork() {
+async function removePopupWork() {
+    console.log("test")
 
+    const workId = displayedWorksRessource.id
+    console.log(workId)
+    
+    const deleteOptions = {
+        method: "DELETE",
+        body: JSON.stringify(workId),
+        headers: {
+            "Content-type": "application/json; charset=UTF-8"
+        }
+    }
+
+    let deleteResponse = await fetch(`${backendHost}/works/{id}`, deleteOptions)
+    if (deleteResponse === 200) {
+        console.log(`"Deleted work : ${{workId}}"`)
+    }
 
 }
 
@@ -90,6 +106,8 @@ function displayPopup() {
     let popupBackground = document.querySelector(".popup-background")
     popupBackground.style.display = "flex"
 }
+
+// ! add a function that will allow to leave the popup on clicking on the background
 
 function hidePopup() {
     let popupBackground = document.querySelector(".popup-background")
