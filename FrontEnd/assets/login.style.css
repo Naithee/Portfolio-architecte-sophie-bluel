@@ -192,7 +192,7 @@ nav li {
 }
 
 li:hover {
-    color: #B1663C;
+	font-weight: bold;
 }
 
 /* Login  */
@@ -254,7 +254,7 @@ button {
 }
 
 button:hover {
-    opacity: 80%;
+    background-color: #123c34;
 }
 
 a {

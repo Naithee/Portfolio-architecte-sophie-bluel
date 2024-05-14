@@ -38,6 +38,7 @@ function renderGalleryContent() {
     const pictureContainer = document.querySelector(".gallery")
     //  Removes the content of the gallery in the DOM
     pictureContainer.innerHTML = ""
+    console.log(pictureContainer)
 
     /* Creates a new DOM element for each object of the API response /works 
     (we access the pictures and the titles of each object and display them)
@@ -57,6 +58,45 @@ function renderGalleryContent() {
         pictureContainer.appendChild(newFigure)
     }
 }
+
+function renderPopupGallery() {
+    const popupGallery = document.querySelector(".popup-gallery")
+
+    for (let i = 0; i < displayedWorksRessource.length; i++) {
+
+        let newFigure = document.createElement("figure")
+        let newPictureElement = document.createElement("img")
+        newPictureElement.src = displayedWorksRessource[i].imageUrl
+        newPictureElement.alt = displayedWorksRessource[i].title
+        let newIcon = document.createElement("i")
+        newIcon.classList.add("fa-solid", "fa-trash-can")
+        newIcon.setAttribute("onclick", "removePopupWork()")
+        newFigure.setAttribute("picture-name", displayedWorksRessource[i]) //not working yet
+
+        newFigure.appendChild(newPictureElement)
+        newFigure.appendChild(newIcon)
+        popupGallery.appendChild(newFigure)
+    }
+
+}
+
+// not working yet + move all the functions related to popup in another file
+function removePopupWork() {
+
+
+}
+
+function displayPopup() {
+    let popupBackground = document.querySelector(".popup-background")
+    popupBackground.style.display = "flex"
+}
+
+function hidePopup() {
+    let popupBackground = document.querySelector(".popup-background")
+    popupBackground.style.display = "none"
+}
+
+
 
 /*  Filter function with If
 
@@ -154,6 +194,7 @@ function processResponseApi() {
     extractKeys()
     displayCategoryKeys()
     focusCategory("Tous")
+    renderPopupGallery()
 }
 
 

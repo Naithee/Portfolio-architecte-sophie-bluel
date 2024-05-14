@@ -6,11 +6,6 @@ let userEmailInput = document.getElementById("email")
 // Gets the DOM input for passwords
 let userPasswordInput = document.getElementById("password")
 
-// Changes the location of the current page to the login page (used with onclick on "login" nav)
-function loadLoginPage() {
-    window.location.href = "login.html"
-}
-
 // Verifies the format of the email input
 function verifyEmail() {
 
@@ -80,12 +75,9 @@ function allowAccess() {
         if (loginResponse.status === 200) {
             let readableResponse = await loginResponse.json()
             console.log(readableResponse)
-            window.location.href = "index.html"
-            /* Create a new HTML file called edition mode and redirect to this file instead
-            (don't forget to do the style with the black banner + modify icone)
-            */
+            window.location.href = "editing.mode.html"
         } 
-        // Displays an error if the access is denied (403)
+        // Displays an error if the access is denied (401 or 404)
         else {
             errorMessage.innerText = "Identifiant ou mot de passe invalide."
         }
