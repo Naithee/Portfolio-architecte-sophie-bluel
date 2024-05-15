@@ -148,7 +148,7 @@ body {
 header {
     display: flex;
     justify-content: space-between;
-    margin: 50px 0;
+    margin: 110px 0;
 }
 
 .editing-banner {
@@ -159,7 +159,9 @@ header {
     color: white;
     align-items: center;
     justify-content: center;
-
+    position: absolute;
+    top: 0px;
+    left: 0px;
 }
 
 .editing-banner p {
@@ -245,12 +247,12 @@ li:hover {
     margin-bottom: 1em;
 }
 
-.title-container{
+.title-container {
     display: flex;
     justify-content: center;
 }
 
-.modify-group{
+.modify-group {
     cursor: pointer;
     display: flex;
     gap: 10px;
@@ -504,7 +506,7 @@ button:hover {
     margin: 15px 0px 15px 0px;
 }
 
-.image-container button:hover{
+.image-container button:hover {
     opacity: 60%;
 }
 
