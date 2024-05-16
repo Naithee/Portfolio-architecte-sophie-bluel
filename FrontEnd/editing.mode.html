@@ -26,6 +26,7 @@
         <h1>Sophie Bluel <span>Architecte d'intérieur</span></h1>
         <nav>
             <ul>
+                <!--Faire sur chaque page href pour les sections correspondantes-->
                 <li>projets</li>
                 <li>contact</li>
                 <li onclick="window.location.href='login.html'">logout</li>
@@ -100,29 +101,33 @@
                 <i class="fa-solid fa-xmark" onclick="hidePopup()"></i>
             </div>
             <h3>Ajout Photo</h3>
-            <div class="image-container"><i class="fa-regular fa-image"></i>
-                <input type="file" id="file" name="filename" accept="image/png, image/jpeg">
-                <p>jpg, png: 4mo max</p>
-            </div>
             <form method="post">
-                <label for="email">Titre</label>
-                <input type="text" id="titre" name="titre">
-                <div class="error-container">
-                    <p id="errorMessage"></p>
+                <div class="image-container"><i class="fa-regular fa-image"></i>
+                    <input type="file" id="file" name="filename" accept="image/png, image/jpeg">
+                    <p>jpg, png: 4mo max</p>
                 </div>
-                <label for="password">Catégorie</label>
-                <select>
-                    <option></option>
-                    <option value="test">Objets</option>
-                    <option value="test">Appartements</option>
-                    <option value="test">Hotels & restaurants</option>
-                </select>
+
+                <div class="input-container">
+                    <label for="title">Titre</label>
+                    <input type="text" id="title" name="title">
+                    <label for="categorie">Catégorie</label>
+                    <select>
+                        <option></option>
+                        <option id="category-option" value="objets">Objets</option>
+                        <option id="category-option" value="appartements">Appartements</option>
+                        <option id="category-option" value="hotels-restaurants">Hotels & restaurants</option>
+                    </select>
+                </div>
             </form>
             <hr>
-            <button class="popup-button" id="validate-button" onclick="">Valider</button>
+            <button type="submit" class="popup-button" id="validate-button" onclick="postNewWork()">Valider</button>
+            <div class="error-container">
+                <p id="errorMessage"></p>
+            </div>
         </div>
+
     </div>
-    </div>
+
 </body>
 
 </html>

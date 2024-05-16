@@ -84,12 +84,11 @@ function renderPopupGallery() {
 async function removePopupWork() {
     console.log("test")
 
-    const workId = displayedWorksRessource.id
-    console.log(workId)
+    let workId = displayedWorksRessource.id
 
     const deleteOptions = {
         method: "DELETE",
-        body: JSON.stringify(workId),
+        body: JSON.stringify({ id: workId }), // no body just id as a path
         headers: {
             "Content-type": "application/json; charset=UTF-8"
         }
@@ -136,6 +135,27 @@ function returnIcone() {
     // in the future do a if/ else to redirect to the correct popup
 }
 
+function postNewWork() {
+
+    const validateButton = document.getElementById("validate-button")
+    const fileUpload = document.getElementById("file")
+    const inputTitle = document.getElementById("title")
+    const categoryOption = document.getElementById("category-option")
+    const errorMessage = document.getElementById("errorMessage")
+
+    // category option not working yet
+    if ((fileUpload.value && inputTitle.value && categoryOption.value) != "") {
+        console.log("there is a file and a title and a category")
+        validateButton.style.cursor = "pointer"
+        errorMessage.innerText = ""
+    } else {
+        validateButton.style.cursor = "not-allowed"
+        errorMessage.innerText = "Veuillez renseigner les informations nécessaires."
+        throw new Error("Missing required information.")
+    }
+
+
+}
 
 
 /*  Filter function with If
