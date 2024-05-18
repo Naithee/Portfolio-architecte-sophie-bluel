@@ -17,7 +17,6 @@
 </head>
 
 <body>
-    <!-- Make the banner take all the width of the screen-->
     <div class="editing-banner"><i class="fa-regular fa-pen-to-square"></i>
         <p>Mode édition</p>
     </div>
@@ -26,9 +25,8 @@
         <h1>Sophie Bluel <span>Architecte d'intérieur</span></h1>
         <nav>
             <ul>
-                <!--Faire sur chaque page href pour les sections correspondantes-->
-                <li>projets</li>
-                <li>contact</li>
+                <li><a href="#portfolio">projets</a></li>
+                <li><a href="#contact">contact</a></li>
                 <li onclick="window.location.href='login.html'">logout</li>
                 <li><img src="./assets/icons/instagram.png" alt="Instagram"></li>
             </ul>
@@ -53,12 +51,12 @@
         <section id="portfolio">
             <div class="title-container">
                 <h2>Mes Projets</h2>
-                <div class="modify-group" onclick="displayPopup()">
+                <div class="modify-group" onclick="displayPopup('popup-delete')">
                     <i class="fa-regular fa-pen-to-square"></i>
                     <p>modifier</p>
                 </div>
             </div>
-            <div class="filter"></div> <!--To change :The filters are not displayed on editing mode !!-->
+            <div class="filter"></div>
             <div class="gallery"></div>
         </section>
         <section id="contact">
@@ -84,48 +82,55 @@
         </nav>
     </footer>
 
-    <div class="popup-background">
-        <div class="popup" id="popup-delete">
-            <div class="icone-container">
-                <i class="fa-solid fa-xmark" onclick="hidePopup()"></i>
-            </div>
-            <h3>Galerie photo</h3>
-            <div class="popup-gallery"></div>
-            <hr>
-            <button class="popup-button" onclick="displayAddWorkPopup()">Ajouter une photo</button>
-        </div>
-
-        <div class="popup" id="popup-add">
-            <div class="icone-container">
-                <i class="fa-solid fa-arrow-left" id="return-icone" onclick="returnIcone()"></i>
-                <i class="fa-solid fa-xmark" onclick="hidePopup()"></i>
-            </div>
-            <h3>Ajout Photo</h3>
-            <form method="post">
-                <div class="image-container"><i class="fa-regular fa-image"></i>
-                    <input type="file" id="file" name="filename" accept="image/png, image/jpeg">
-                    <p>jpg, png: 4mo max</p>
+    <div class="popup">
+        <div class="popup-foreground">
+            <div class="popup-content" id="popup-delete">
+                <div class="icone-container" onclick="hidePopup()">
+                    <i class="fa-solid fa-xmark" ></i>
                 </div>
+                <h3>Galerie photo</h3>
+                <div class="popup-gallery"></div>
+                <hr>
+                <button class="popup-button" onclick="displayPopup('popup-add')">Ajouter une photo</button>
+            </div>
 
-                <div class="input-container">
-                    <label for="title">Titre</label>
-                    <input type="text" id="title" name="title">
-                    <label for="categorie">Catégorie</label>
-                    <select>
-                        <option></option>
-                        <option id="category-option" value="objets">Objets</option>
-                        <option id="category-option" value="appartements">Appartements</option>
-                        <option id="category-option" value="hotels-restaurants">Hotels & restaurants</option>
-                    </select>
+            <div class="popup-content" id="popup-add">
+                <div class="icone-container" >
+                    <i class="fa-solid fa-arrow-left" id="return-icone" onclick="displayPopup('popup-delete')"></i>
+                    <i class="fa-solid fa-xmark" onclick="hidePopup()"></i>
                 </div>
-            </form>
-            <hr>
-            <button type="submit" class="popup-button" id="validate-button" onclick="postNewWork()">Valider</button>
-            <div class="error-container">
-                <p id="errorMessage"></p>
+                <h3>Ajout Photo</h3>
+                <form method="post">
+                    <div class="image-container">
+                        <i class="fa-regular fa-image"></i>
+                       
+                        <label for="file" class="file-label">+ Ajouter photo</label>
+                        <input type="file" id="file" name="filename" accept="image/png, image/jpeg">
+                        
+                        <p>jpg, png: 4mo max</p>
+                    </div>
+
+                    <div class="input-container">
+                        <label for="title">Titre</label>
+                        <input type="text" id="title" name="title">
+                        <label for="categorie">Catégorie</label>
+                        <select>
+                            <option></option>
+                            <option id="category-option" value="objets">Objets</option>
+                            <option id="category-option" value="appartements">Appartements</option>
+                            <option id="category-option" value="hotels-restaurants">Hotels & restaurants</option>
+                        </select>
+                    </div>
+                </form>
+                <hr>
+                <button type="submit" class="popup-button" id="validate-button" onclick="postNewWork()">Valider</button>
+                <div class="error-container">
+                    <p id="errorMessage"></p>
+                </div>
             </div>
         </div>
-
+        <div class="popup-background" onclick="hidePopup()"></div>
+        
     </div>
 
 </body>

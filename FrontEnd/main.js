@@ -101,18 +101,23 @@ async function removePopupWork() {
 
 }
 
-function displayPopup() {
-    let popupBackground = document.querySelector(".popup-background")
-    popupBackground.style.display = "flex"
-    let popupAdd = document.getElementById("popup-add")
-    popupAdd.style.display = "none"
+function displayPopup(contentType) {
+    let popupContainer = document.querySelector(".popup")
+    popupContainer.style.display = "flex"
+
+    // clear old content
+    let popupContentList = document.getElementsByClassName('popup-content')
+    for (let i = 0; i < popupContentList.length; i++) {
+        popupContentList[i].style.display = (popupContentList[i].id === contentType) ? "flex" : "none"
+        console.log(popupContentList[i].id, popupContentList[i].style.display)
+    }
+
 }
 
-// ! add a function that will allow to leave the popup on clicking on the background
 
 function hidePopup() {
-    let popupBackground = document.querySelector(".popup-background")
-    popupBackground.style.display = "none"
+    let popupContainer = document.querySelector(".popup")
+    popupContainer.style.display = "none"
 }
 
 function displayAddWorkPopup() {
