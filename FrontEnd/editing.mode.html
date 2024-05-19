@@ -10,8 +10,9 @@
     <link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=Work+Sans&display=swap"
         rel="stylesheet">
     <meta name="description" content="">
-    <script src="main.js" defer></script>
+    <script src="shared.js" defer></script>
     <script src="login.js" defer></script>
+    <script src="popup.js" defer></script>
     <link rel="stylesheet" href="./assets/edition.mode.css">
     <script src="https://kit.fontawesome.com/388b2c0ac6.js" crossorigin="anonymous"></script>
 </head>
@@ -86,7 +87,7 @@
         <div class="popup-foreground">
             <div class="popup-content" id="popup-delete">
                 <div class="icone-container" onclick="hidePopup()">
-                    <i class="fa-solid fa-xmark" ></i>
+                    <i class="fa-solid fa-xmark"></i>
                 </div>
                 <h3>Galerie photo</h3>
                 <div class="popup-gallery"></div>
@@ -95,7 +96,7 @@
             </div>
 
             <div class="popup-content" id="popup-add">
-                <div class="icone-container" >
+                <div class="icone-container">
                     <i class="fa-solid fa-arrow-left" id="return-icone" onclick="displayPopup('popup-delete')"></i>
                     <i class="fa-solid fa-xmark" onclick="hidePopup()"></i>
                 </div>
@@ -103,10 +104,10 @@
                 <form method="post">
                     <div class="image-container">
                         <i class="fa-regular fa-image"></i>
-                       
+
                         <label for="file" class="file-label">+ Ajouter photo</label>
                         <input type="file" id="file" name="filename" accept="image/png, image/jpeg">
-                        
+
                         <p>jpg, png: 4mo max</p>
                     </div>
 
@@ -130,7 +131,7 @@
             </div>
         </div>
         <div class="popup-background" onclick="hidePopup()"></div>
-        
+
     </div>
 
 </body>

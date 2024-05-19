@@ -1,10 +1,14 @@
-//  Declaration of the path to the API (will allow us to not retype it for each request) 
-const backendHost = "http://localhost:5678/api"
+/* email: sophie.bluel@test.tld
+
+password: S0phie  */
 
 // Gets the DOM input for email
 let userEmailInput = document.getElementById("email")
 // Gets the DOM input for passwords
 let userPasswordInput = document.getElementById("password")
+
+userEmailInput.value = "sophie.bluel@test.tld"
+userPasswordInput.value = "S0phie"
 
 // Verifies the format of the email input
 function verifyEmail() {
@@ -52,7 +56,7 @@ function allowAccess() {
             return
         }
 
-        // Parameter of the fetch function that sets the options of the post method
+        // Parameter of the fetch function that sets the options of the POST method
         let postOptions = {
             // Defines which method we use with fetch
             method: "POST",
@@ -76,7 +80,7 @@ function allowAccess() {
             let readableResponse = await loginResponse.json()
             console.log(readableResponse)
             window.location.href = "editing.mode.html"
-        } 
+        }
         // Displays an error if the access is denied (401 or 404)
         else {
             errorMessage.innerText = "Identifiant ou mot de passe invalide."
@@ -84,7 +88,6 @@ function allowAccess() {
     })
 
 }
-
 
 allowAccess()
 

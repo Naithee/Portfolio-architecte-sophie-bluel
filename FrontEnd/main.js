@@ -1,6 +1,3 @@
-//  Declaration of the path to the API (will allow us to not retype it for each request) 
-const backendHost = "http://localhost:5678/api"
-
 // Stores the API response for the "works" ressource 
 let worksRessource = [];
 // Stores the API content displayed in the DOM  
@@ -38,8 +35,7 @@ function renderGalleryContent() {
     const pictureContainer = document.querySelector(".gallery")
     //  Removes the content of the gallery in the DOM
     pictureContainer.innerHTML = ""
-    console.log(pictureContainer)
-
+    
     /* Creates a new DOM element for each object of the API response /works 
     (we access the pictures and the titles of each object and display them)
     */
@@ -57,109 +53,6 @@ function renderGalleryContent() {
         newFigure.appendChild(newFigcaption)
         pictureContainer.appendChild(newFigure)
     }
-}
-
-function renderPopupGallery() {
-    const popupGallery = document.querySelector(".popup-gallery")
-
-    for (let i = 0; i < displayedWorksRessource.length; i++) {
-
-        let newFigure = document.createElement("figure")
-        let newPictureElement = document.createElement("img")
-        newPictureElement.src = displayedWorksRessource[i].imageUrl
-        newPictureElement.alt = displayedWorksRessource[i].title
-        let newIcon = document.createElement("i")
-        newIcon.classList.add("fa-solid", "fa-trash-can")
-        newIcon.setAttribute("onclick", "removePopupWork()")
-        newFigure.setAttribute("picture-name", displayedWorksRessource[i]) //not working yet
-
-        newFigure.appendChild(newPictureElement)
-        newFigure.appendChild(newIcon)
-        popupGallery.appendChild(newFigure)
-    }
-
-}
-
-// not working yet + move all the functions related to popup in another file
-async function removePopupWork() {
-    console.log("test")
-
-    let workId = displayedWorksRessource.id
-
-    const deleteOptions = {
-        method: "DELETE",
-        body: JSON.stringify({ id: workId }), // no body just id as a path
-        headers: {
-            "Content-type": "application/json; charset=UTF-8"
-        }
-    }
-
-    let deleteResponse = await fetch(`${backendHost}/works/{id}`, deleteOptions)
-    if (deleteResponse === 200) {
-        console.log(`"Deleted work : ${{ workId }}"`)
-    }
-
-}
-
-function displayPopup(contentType) {
-    let popupContainer = document.querySelector(".popup")
-    popupContainer.style.display = "flex"
-
-    // clear old content
-    let popupContentList = document.getElementsByClassName('popup-content')
-    for (let i = 0; i < popupContentList.length; i++) {
-        popupContentList[i].style.display = (popupContentList[i].id === contentType) ? "flex" : "none"
-        console.log(popupContentList[i].id, popupContentList[i].style.display)
-    }
-
-}
-
-
-function hidePopup() {
-    let popupContainer = document.querySelector(".popup")
-    popupContainer.style.display = "none"
-}
-
-function displayAddWorkPopup() {
-
-    let popupDelete = document.getElementById("popup-delete")
-    popupDelete.style.display = "none"
-
-    let popupAdd = document.getElementById("popup-add")
-    popupAdd.style.display = "flex"
-
-}
-
-function returnIcone() {
-    let popupDelete = document.getElementById("popup-delete")
-    popupDelete.style.display = "flex"
-
-    let popupAdd = document.getElementById("popup-add")
-    popupAdd.style.display = "none"
-
-    // in the future do a if/ else to redirect to the correct popup
-}
-
-function postNewWork() {
-
-    const validateButton = document.getElementById("validate-button")
-    const fileUpload = document.getElementById("file")
-    const inputTitle = document.getElementById("title")
-    const categoryOption = document.getElementById("category-option")
-    const errorMessage = document.getElementById("errorMessage")
-
-    // category option not working yet
-    if ((fileUpload.value && inputTitle.value && categoryOption.value) != "") {
-        console.log("there is a file and a title and a category")
-        validateButton.style.cursor = "pointer"
-        errorMessage.innerText = ""
-    } else {
-        validateButton.style.cursor = "not-allowed"
-        errorMessage.innerText = "Veuillez renseigner les informations nécessaires."
-        throw new Error("Missing required information.")
-    }
-
-
 }
 
 
@@ -266,4 +159,5 @@ function processResponseApi() {
 
 // Executes the function calls after receiving the response of the API 
 getWorksApi().then(processResponseApi)
+
 
