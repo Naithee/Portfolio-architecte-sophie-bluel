@@ -371,6 +371,7 @@ footer nav ul {
     margin: 2em
 }
 
+/*  Popup   */
 
 .popup{
     display: none;
@@ -413,10 +414,9 @@ footer nav ul {
 
 .icone-container {
     display: flex;
-    width: 100%;
+    width: 600px;
     align-items: center;
     justify-content: flex-end;
-    padding: 0px 50px 0px 50px;
     font-weight: bold;
     font-size: 20px;
 }
