@@ -16,6 +16,8 @@
 </head>
 
 <body>
+
+    <!--Header-->
     <header>
         <h1>Sophie Bluel <span>Architecte d'intérieur</span></h1>
         <nav>
@@ -28,24 +30,33 @@
         </nav>
     </header>
     <main>
+
+        <!--Login-->
         <section class="login-container">
             <h2>Log in</h2>
             <form method="post">
+
+                <!--Email input-->
                 <label for="email">E-mail</label>
                 <input type="text" id="email" name="email">
-                <div class="error-container">
-                    <p id="errorMessage"></p>
-                </div>
+
+                <!--Password input-->
                 <label for="password">Mot de passe</label>
                 <input type="password" name="password" id="password">
+
+                <!--Submit button-->
                 <div class="button-container">
                     <button type="submit">Se connecter</button>
                     <a href="#">Mot de passe oublié</a>
                 </div>
             </form>
         </section>
+        <div class="error-container">
+            <p id="errorMessage"></p>
+        </div>
     </main>
 
+    <!--Footer-->
     <footer>
         <nav>
             <ul>
