@@ -12,6 +12,7 @@
     <meta name="description" content="">
     <script src="shared.js" defer></script>
     <script src="login.js" defer></script>
+    <script src="main.js" defer></script>
     <script src="popup.js" defer></script>
     <link rel="stylesheet" href="./assets/edition.mode.css">
     <script src="https://kit.fontawesome.com/388b2c0ac6.js" crossorigin="anonymous"></script>
@@ -122,30 +123,33 @@
                     <i class="fa-solid fa-xmark" onclick="hidePopup()"></i>
                 </div>
                 <h3>Ajout Photo</h3>
-                <form method="post">
+                <form method="post" id="upload" name="uploader", action="http://localhost:5678/api/works", method="post">
                     <div class="image-container">
                         <i class="fa-regular fa-image"></i>
 
                         <label for="file" class="file-label">+ Ajouter photo</label>
-                        <input type="file" id="file" name="filename" accept="image/png, image/jpeg">
+                        <input type="file" id="file" name="image" accept="image/png, image/jpeg">
 
                         <p>jpg, png: 4mo max</p>
+                        <div id="uploaded-preview-container">
+
+                        </div>
                     </div>
 
                     <div class="input-container">
                         <label for="title">Titre</label>
                         <input type="text" id="title" name="title">
                         <label for="categorie">Catégorie</label>
-                        <select>
-                            <option></option>
-                            <option id="category-option" value="objets">Objets</option>
-                            <option id="category-option" value="appartements">Appartements</option>
-                            <option id="category-option" value="hotels-restaurants">Hotels & restaurants</option>
+                        <select id="category-option" name="category">
+                            <option value="0"></option>
+                            <option value="1">Objets</option>
+                            <option value="2">Appartements</option>
+                            <option value="3">Hotels & restaurants</option>
                         </select>
                     </div>
+                    <button type="submit" class="popup-button" id="validate-button">Valider</button>
                 </form>
                 <hr>
-                <button type="submit" class="popup-button" id="validate-button" onclick="postNewWork()">Valider</button>
                 <div class="error-container">
                     <p id="errorMessage"></p>
                 </div>

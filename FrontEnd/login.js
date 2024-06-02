@@ -7,9 +7,10 @@ let userEmailInput = document.getElementById("email")
 // Gets the DOM input for passwords
 let userPasswordInput = document.getElementById("password")
 
+if (userPasswordInput && userEmailInput) {
 userEmailInput.value = "sophie.bluel@test.tld"
 userPasswordInput.value = "S0phie"
-
+}
 // Verifies the format of the email input
 function verifyEmail() {
 
@@ -67,18 +68,17 @@ function allowAccess() {
             }),
             // Specifies the type of data that will be sent
             headers: {
-                "Content-type": "application/json; charset=UTF-8"
+                "Content-Type": "application/json"
             }
         }
 
         // Posts the passwords and emails to the API at the login ressource
         let loginResponse = await fetch(`${backendHost}/users/login`, postOptions)
-
         /* Deserializes the response of the API and redirects to the edit mode homepage 
         if the access is allowed (200) */
         if (loginResponse.status === 200) {
             let readableResponse = await loginResponse.json()
-            console.log(readableResponse)
+            setToken(readableResponse.token)
             window.location.href = "editing.mode.html"
         }
         // Displays an error if the access is denied (401 or 404)

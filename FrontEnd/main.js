@@ -1,36 +1,12 @@
-// Stores the API response for the "works" ressource 
-let worksRessource = [];
+
 // Stores the API content displayed in the DOM  
 let displayedWorksRessource = []
 // Stores the category names of the works, initialised with "Tous"
 let categoryKeysArray = ["Tous"]
 
-//  Function that gets the data from the API and deserializes it
-async function getWorksApi() {
-    try {
-        //  Sends a request to the API for the ressource /works
-        let responsePictures = await fetch(`${backendHost}/works`)
-
-        // Deserializes the response of the request (turns the response into a JS object )
-        let worksApiResponse = await responsePictures.json()
-
-        //  Throws an error if the response is not an array 
-        if (!Array.isArray(worksApiResponse)) {
-            throw new Error("Unexpected response")
-        }
-
-        worksRessource = worksApiResponse
-
-    }
-    catch (error) {
-        console.log("Error while fetching images")
-        console.log(error)
-    }
-}
-
 //  Renders the gallery content with the API response
 function renderGalleryContent() {
-
+console.log(displayedWorksRessource)
     //  Get the DOM element where the pictures will be inserted 
     const pictureContainer = document.querySelector(".gallery")
     //  Removes the content of the gallery in the DOM
