@@ -16,7 +16,7 @@ function resetInputs() {
     const inputTitleElement = document.getElementById("title")
     categoryOptionElement.value = 0
     inputTitleElement.value = ""
-    fileUploadElement.files = []
+    fileUploadElement.files = null
     currentTitle = null;
     currentCategory = null;
     currentFile = null;
@@ -31,7 +31,6 @@ function resetFileInput() {
     currentFileContent = null;
     document.getElementById('uploaded-preview-container').innerHTML = ""
     fileUploadElement.files = []
-
 }
 
 displaySubmitButtonState()
@@ -56,7 +55,6 @@ uploadButton.addEventListener("change", () => {
         newPictureElement.alt = uploadButton.files[0]
 
         previewContainer.appendChild(newPictureElement)
-
     }
 });
 
@@ -91,12 +89,11 @@ function renderPopupGallery() {
 
 //  Deletes the selected work from the API and refreshes the gallery content
 async function removePopupWork(event) {
+
     let workId;
     if (event instanceof PointerEvent && event.target instanceof HTMLElement) {
         //  Accesses the id of the selected work
         workId = event.target.parentElement.attributes.getNamedItem('picture-name').value
-
-
     }
 
     // Parameter of the fetch function that sets the options of the DELETE method
@@ -120,7 +117,25 @@ async function removePopupWork(event) {
         console.log(`"Deleted work : ${workId}"`)
     }
 
+
+    worksRessource = worksRessource.filter((element) => {
+        return element.id != workId
+    })
+
+    displayedWorksRessource = displayedWorksRessource.filter((element) => {
+        return element.id != workId
+    })
+
+ let elements = document.getElementsByTagName("figure")
+    console.log(elements)
+    for (let i = 0; i < elements.length; i++) {
+        if (elements[i].getAttribute('picture-name') === workId){
+            elements[i].remove()
+        }
+    }
 }
+
+
 
 //  Displays the popup with onclick on the modify icone
 function displayPopup(contentType) {

@@ -8,8 +8,8 @@ let userEmailInput = document.getElementById("email")
 let userPasswordInput = document.getElementById("password")
 
 if (userPasswordInput && userEmailInput) {
-userEmailInput.value = "sophie.bluel@test.tld"
-userPasswordInput.value = "S0phie"
+    userEmailInput.value = "sophie.bluel@test.tld"
+    userPasswordInput.value = "S0phie"
 }
 // Verifies the format of the email input
 function verifyEmail() {
@@ -76,10 +76,11 @@ function allowAccess() {
         let loginResponse = await fetch(`${backendHost}/users/login`, postOptions)
         /* Deserializes the response of the API and redirects to the edit mode homepage 
         if the access is allowed (200) */
+        console.log(loginResponse)
         if (loginResponse.status === 200) {
             let readableResponse = await loginResponse.json()
             setToken(readableResponse.token)
-            window.location.href = "editing.mode.html"
+            window.location.href = "index.html"
         }
         // Displays an error if the access is denied (401 or 404)
         else {

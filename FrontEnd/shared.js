@@ -7,6 +7,9 @@ const backendHost = "http://localhost:5678/api"
 const localStorageAuthKey = "bearer-token"
 
 
+// Stores the API content displayed in the DOM  
+let displayedWorksRessource = []
+
 // Stores the API response for the "works" ressource 
 let worksRessource = [];
 
@@ -42,3 +45,40 @@ async function getWorksApi() {
         console.log(error)
     }
 }
+
+function displayLoginLogout() {
+    let li = document.createElement('li')
+    let filter = document.getElementsByClassName("filter")[0]
+    let editingBanner = document.getElementById("editing-banner")
+    document.getElementById('login-logout').innerHTML = ""
+    let headerPage = document.getElementById("header")
+    let modifyGroup = document.getElementById("modify-group")
+    let isLoggedIn = (getToken() !== null)
+    if (!isLoggedIn) {
+        li.setAttribute('onclick', "login()")
+        li.innerHTML = "login"
+        filter.style.display = "flex"
+        editingBanner.style.display = "none"
+        modifyGroup.style.display = "none"
+        headerPage.style.marginTop = "50px"
+    } else {
+        li.setAttribute('onclick', "logout()")
+        li.innerHTML = "logout"
+        filter.style.display = "none"
+        modifyGroup.style.display = "flex"
+        editingBanner.style.display = "flex"
+        headerPage.style.marginTop = "100px"
+    }
+    document.getElementById('login-logout').appendChild(li)
+}
+
+
+function login() {
+    window.location.href = "login.html"
+}
+
+function logout() {
+    localStorage.removeItem(localStorageAuthKey)
+    displayLoginLogout()
+}
+
