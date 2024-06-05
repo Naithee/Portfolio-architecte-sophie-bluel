@@ -1,32 +1,18 @@
-
-
 // Stores the category names of the works, initialised with "Tous"
 let categoryKeysArray = ["Tous"]
 
 //  Renders the gallery content with the API response
 function renderGalleryContent() {
-    console.log(displayedWorksRessource)
+
     //  Get the DOM element where the pictures will be inserted 
     const pictureContainer = document.querySelector(".gallery")
     //  Removes the content of the gallery in the DOM
     pictureContainer.innerHTML = ""
 
-    /* Creates a new DOM element for each object of the API response /works 
-    (we access the pictures and the titles of each object and display them)
-    */
+   let gallery = document.querySelector(".gallery")
     for (let i = 0; i < displayedWorksRessource.length; i++) {
 
-        let newFigure = document.createElement("figure")
-        let newPicturElement = document.createElement("img")
-        newPicturElement.src = displayedWorksRessource[i].imageUrl
-        newPicturElement.alt = displayedWorksRessource[i].title
-        let newFigcaption = document.createElement("figcaption")
-        newFigcaption.innerText = displayedWorksRessource[i].title
-        newFigure.setAttribute("picture-name", displayedWorksRessource[i].id)
-        //  Appends the new elements to the DOM
-        newFigure.appendChild(newPicturElement)
-        newFigure.appendChild(newFigcaption)
-        pictureContainer.appendChild(newFigure)
+        addToGallery(gallery, displayedWorksRessource[i], "portfolio")
     }
 }
 
@@ -133,4 +119,5 @@ function processResponseApi() {
 // Executes the function calls after receiving the response of the API 
 getWorksApi().then(processResponseApi)
 
+// Displays the editing mode if the user is logged in
 displayLoginLogout()

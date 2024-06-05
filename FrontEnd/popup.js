@@ -1,15 +1,14 @@
-
-// document.getElementById("title").value = "dodge"
-
 let form = document.getElementById('upload');
 let uploadButton = document.getElementById('file');
+
+// Sets all inputs of the upload page to null
 let currentTitle = null;
 let currentCategory = null;
 let currentFile = null;
 let currentFileContent = null;
 let inputIsValid = false;
 
-
+// Resets all the inputs of the upload page
 function resetInputs() {
     const categoryOptionElement = document.getElementById("category-option")
     const fileUploadElement = document.getElementById("file")
@@ -25,29 +24,35 @@ function resetInputs() {
     document.getElementById('uploaded-preview-container').innerHTML = ""
 }
 
+// Resets the input of the file upload
 function resetFileInput() {
     inputIsValid = false;
     currentFile = null;
     currentFileContent = null;
+    document.getElementById("file").value = ""
     document.getElementById('uploaded-preview-container').innerHTML = ""
     fileUploadElement.files = []
 }
 
+// Sets the style of the submit button
 displaySubmitButtonState()
 
+// Calls the post function on submit
 form.addEventListener("submit", async (event) => {
     event.preventDefault()
     postNewWork(event)
 })
 
+// Calls function that validates the content of all inputs and stores them
 form.addEventListener("change", async (event) => {
     onInputChange()
-
 })
 
+
+// Renders a preview of the uploaded file
 uploadButton.addEventListener("change", () => {
     if (uploadButton.files.length == 1) {
-        console.log("File selected: ", uploadButton.files[0]);
+
         let previewContainer = document.getElementById('uploaded-preview-container')
 
         let newPictureElement = document.createElement("img")
@@ -58,31 +63,15 @@ uploadButton.addEventListener("change", () => {
     }
 });
 
-
-//  Renders the popup gallery content with the API response
+// Renders the gallery popup with addToGallery()
 function renderPopupGallery() {
 
     //  Get the DOM element where the pictures will be inserted 
     const popupGallery = document.querySelector(".popup-gallery")
 
-    /* Creates a new DOM element for each object of the API response /works 
-   (we access the pictures of each object and display them)
-   */
-
+    // Calls the render function for the mode popup to displays the gallery pictures
     for (let i = 0; i < displayedWorksRessource.length; i++) {
-
-        let newFigure = document.createElement("figure")
-        let newPictureElement = document.createElement("img")
-        newPictureElement.src = displayedWorksRessource[i].imageUrl
-        newPictureElement.alt = displayedWorksRessource[i].title
-        let newIcon = document.createElement("i")
-        newIcon.classList.add("fa-solid", "fa-trash-can")
-        newIcon.setAttribute("onclick", "removePopupWork(event)")
-        newFigure.setAttribute("picture-name", displayedWorksRessource[i].id)
-
-        newFigure.appendChild(newPictureElement)
-        newFigure.appendChild(newIcon)
-        popupGallery.appendChild(newFigure)
+        addToGallery(popupGallery, displayedWorksRessource[i], "popup")
     }
 
 }
@@ -90,10 +79,10 @@ function renderPopupGallery() {
 //  Deletes the selected work from the API and refreshes the gallery content
 async function removePopupWork(event) {
 
-    let workId;
+    let deleteWorkId;
     if (event instanceof PointerEvent && event.target instanceof HTMLElement) {
         //  Accesses the id of the selected work
-        workId = event.target.parentElement.attributes.getNamedItem('picture-name').value
+        deleteWorkId = event.target.parentElement.attributes.getNamedItem('picture-name').value
     }
 
     // Parameter of the fetch function that sets the options of the DELETE method
@@ -109,33 +98,40 @@ async function removePopupWork(event) {
     }
 
     // Send a delete request of the selected work to the API at the works ressource
-    let deleteResponse = await fetch(`${backendHost}/works/${workId}`, deleteOptions)
+    let deleteResponse = await fetch(`${backendHost}/works/${deleteWorkId}`, deleteOptions)
 
     /* Deserializes the response of the API and removes the selected work 
       if the request is valid */
     if (deleteResponse.status === 204) {
-        console.log(`"Deleted work : ${workId}"`)
+        console.log(`"Deleted work : ${deleteWorkId}"`)
     }
 
 
     worksRessource = worksRessource.filter((element) => {
-        return element.id != workId
+        return element.id != deleteWorkId
     })
+
+    /* Executes the same as worksRessource.filter in a more explicite way
+    let filteredRessources = []
+    for (let i = 0; i < worksRessource.length; i++) {
+        if (worksRessource[i].id !== deleteWorkId) {
+            filteredRessources.push(worksRessource[i])
+        }
+    }
+    worksRessource = filteredRessources */
 
     displayedWorksRessource = displayedWorksRessource.filter((element) => {
-        return element.id != workId
+        return element.id != deleteWorkId
     })
 
- let elements = document.getElementsByTagName("figure")
-    console.log(elements)
+    let elements = document.getElementsByTagName("figure")
+
     for (let i = 0; i < elements.length; i++) {
-        if (elements[i].getAttribute('picture-name') === workId){
+        if (elements[i].getAttribute('picture-name') === deleteWorkId) {
             elements[i].remove()
         }
     }
 }
-
-
 
 //  Displays the popup with onclick on the modify icone
 function displayPopup(contentType) {
@@ -148,7 +144,6 @@ function displayPopup(contentType) {
     let popupContentList = document.getElementsByClassName('popup-content')
     for (let i = 0; i < popupContentList.length; i++) {
         popupContentList[i].style.display = (popupContentList[i].id === contentType) ? "flex" : "none"
-        console.log(popupContentList[i].id, popupContentList[i].style.display)
     }
 
 }
@@ -187,15 +182,14 @@ function returnIcone() {
     popupAdd.style.display = "none"
 }
 
-
+// Validates the content of all inputs and stores them
 function onInputChange() {
     const categoryOptionElement = document.getElementById("category-option")
     const fileUploadElement = document.getElementById("file")
     const inputTitleElement = document.getElementById("title")
 
     if (!categoryOptionElement || !fileUploadElement || !inputTitleElement) {
-        window.alert("ERROR") // TODO 
-        throw new Error("Error") // TODO
+        throw new Error("Error")
     }
 
     currentTitle = inputTitleElement.value
@@ -203,11 +197,12 @@ function onInputChange() {
     currentFile = fileUploadElement.files[0]
     validateInput()
     displaySubmitButtonState(inputIsValid)
-
 }
 
+// Sets the style of the submit button
 function displaySubmitButtonState(state) {
     const validateButton = document.getElementById("validate-button")
+
     if (state !== true) {
         validateButton.classList.add('button-disabled')
     } else {
@@ -215,11 +210,12 @@ function displaySubmitButtonState(state) {
     }
 }
 
+// Verifies if the inputs of the page are valid 
 function validateInput() {
     inputIsValid = ((!!currentTitle || !!currentCategory || !!currentFile) && (currentTitle !== "" && currentCategory !== "" && currentFile.name !== ""))
 }
 
-//  Verifies the inputs and sends a POST request to the API
+// Sends a POST request to the API
 async function postNewWork(event) {
     const form = event.target;
     const formData = new FormData(form);
@@ -232,10 +228,16 @@ async function postNewWork(event) {
             "Authorization": `Bearer ${getToken()}`
         }
     })
+        // Deserializes the response of the request (turns the response into a JS object )
         .then(response => response.json())
         .then(data => {
-            console.log('Success:', data);
-            console.log(formData)
+            // Renders the new element in the popup gallery
+            const popupGallery = document.querySelector(".popup-gallery")
+            addToGallery(popupGallery, data, "popup")
+            // Renders the new element in the portfolio gallery
+            const gallery = document.querySelector(".gallery")
+            addToGallery(gallery, data, "portfolio")
+            hidePopup()
         })
         .catch(error => {
             console.error('Error:', error);

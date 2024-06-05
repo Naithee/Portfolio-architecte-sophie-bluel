@@ -51,7 +51,6 @@ function allowAccess() {
                 throw new Error("Mot de passe invalide")
             }
         }
-        // (￣﹃￣) where is the error defined + what is return for?
         catch (error) {
             console.log(error)
             return
