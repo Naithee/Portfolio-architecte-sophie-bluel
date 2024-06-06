@@ -69,6 +69,7 @@
 					<i class="fa-regular fa-pen-to-square"></i>
 					<p>modifier</p>
 				</div>
+				
 			</div>
 
 			<!--Filter category menu-->
@@ -119,18 +120,18 @@
 					<form method="post" id="upload" name="uploader" , action="http://localhost:5678/api/works" ,
 						method="post">
 						<div class="image-container">
+							<div class="reset-file" onclick="resetFileInput()"><i class="fa-solid fa-ban"></i></div>
 							<i class="fa-regular fa-image"></i>
 
 							<label for="file" class="file-label">+ Ajouter photo</label>
 							<input type="file" id="file" name="image" accept="image/png, image/jpeg">
 
 							<p>jpg, png: 4mo max</p>
-							<div id="uploaded-preview-container">
 
-							</div>
+							<div id="uploaded-preview-container"></div>
 						</div>
-						
-						<button onclick="resetFileInput()">Remove upload</button>
+
+
 
 						<div class="input-container">
 							<label for="title">Titre</label>

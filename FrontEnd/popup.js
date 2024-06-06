@@ -31,7 +31,6 @@ function resetFileInput() {
     currentFileContent = null;
     document.getElementById("file").value = ""
     document.getElementById('uploaded-preview-container').innerHTML = ""
-    fileUploadElement.files = []
 }
 
 // Sets the style of the submit button
